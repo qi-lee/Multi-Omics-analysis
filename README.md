@@ -72,6 +72,8 @@ Other related software: CheckM.
   <br>
   "The STAR aligner is a very fast and efficent spliced aligner tools for aligning RNAseq data to genomes."
     
+    conda install -c bioconda star --yes
+    
     STAR -h
     STAR --genomeDir star_index --readFilesIn ${SAMPLE}_filtered.fq  --runThreadN 20 --outSAMtype BAM SortedByCoordinate --quantMode GeneCounts
 
@@ -81,6 +83,8 @@ Other related software: CheckM.
   Summarizing Gene Counts with featureCounts.
   <br>
   "featureCounts is a highly efficient general-purpose read summarization program that counts mapped reads for genomic features such as genes, exons, promoter, gene bodies, genomic bins and chromosomal locations. It can be used to count both RNA-seq and genomic DNA-seq reads. featureCounts takes as input SAM/BAM files and an annotation file including chromosomal coordinates of features."
+    
+    conda install -c bioconda subread --yes
     
     featureCounts -h
     featureCounts -T 20 -p -t gene -a genomic.gtf -o ${SAMPLE}_final_counts.txt ${SAMPLE}.bam
