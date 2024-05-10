@@ -128,6 +128,22 @@ Other related software: CheckM.
 
 <br>
 
+### * 5.1 Metabonomics/Metabolomics-Analysis-Toolbox
+  Metabolomics Analysis Toolbox
+  <br>
+  "Metabolomics Analysis Toolbox is a collection of software developed by the Wright State University Bioinformatics Research Group and the College of Charleston Bioinformatics Research Group to help in metabolomics research."
+
+<br>
+
+### * 5.2 Metabonomics/MetaboAnalyst
+  MetaboAnalyst
+  <br>
+  "MetaboAnalyst is a web-based platform dedicated for comprehensive metabolomics data analysis, interpretation and integration with other omics data."
+  
+    www.metaboanalyst.ca/
+
+<br>
+
 
 ### * 6.Phylogenetic analysis
 To infer phylogenetic relationships among bacteria, a whole-genome based and alignment-free Composition Vector Tree (CVTree) method was applied to the comparison and clustering of the 68 genomes we extracted from our assemblies.
