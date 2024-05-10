@@ -1,0 +1,2 @@
+Pang Z, Lu Y, Zhou G, et al. MetaboAnalyst 6.0: towards a unified platform for metabolomics data processing, analysis and interpretation[J]. Nucleic Acids Research, 2024: gkae253.
+Pang Z, Chong J, Zhou G, et al. MetaboAnalyst 5.0: narrowing the gap between raw spectra and functional insights[J]. Nucleic acids research, 2021, 49(W1): W388-W396.
