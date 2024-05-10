@@ -105,6 +105,17 @@ Other related software: CheckM.
 
 <br>
 
+### * 4.1 Metaproteomics/MetaProteomeAnalyzer
+  MetaProteomeAnalyzer (MPA)
+  <br>
+  "MetaProteomeAnalyzer (MPA) software for analyzing and visualizing MS-based metaproteomics data."
+
+    conda install mpa-portable -c bioconda
+    java -cp mpa-portable-X.Y.Z.jar de.mpa.cli.CmdLineInterface [parameters]
+    java -cp mpa-portable-X.Y.Z.jar de.mpa.cli.CmdLineInterface -spectrum_files spectrum_file.mgf -database uniprot_sprot.fasta -missed_cleav 1 -prec_tol 10ppm -frag_tol 0.5Da -output_folder output
+
+<br>
+
 
 ### * 6.Phylogenetic analysis
 To infer phylogenetic relationships among bacteria, a whole-genome based and alignment-free Composition Vector Tree (CVTree) method was applied to the comparison and clustering of the 68 genomes we extracted from our assemblies.
