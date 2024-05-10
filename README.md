@@ -55,6 +55,14 @@ Other related software: CheckM.
 <br>
 
 
+### * 3.1 Metatranscriptomics/RemovingrRNA
+  Removing rRNA Sequences with SortMeRNA.
+  "SortMeRNA is a program tool for filtering, mapping and OTU-picking NGS reads in metatranscriptomic and metagenomic data. The core algorithm is based on approximate seeds and allows for fast and sensitive analyses of nucleotide sequences. The main application of SortMeRNA is filtering ribosomal RNA from metatranscriptomic data."
+    
+    sortmerna -h
+
+<br>
+
 
 ### * 6.Phylogenetic analysis
 To infer phylogenetic relationships among bacteria, a whole-genome based and alignment-free Composition Vector Tree (CVTree) method was applied to the comparison and clustering of the 68 genomes we extracted from our assemblies.
