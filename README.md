@@ -57,9 +57,20 @@ Other related software: CheckM.
 
 ### * 3.1 Metatranscriptomics/RemovingrRNA
   Removing rRNA Sequences with SortMeRNA.
+  <br>
   "SortMeRNA is a program tool for filtering, mapping and OTU-picking NGS reads in metatranscriptomic and metagenomic data. The core algorithm is based on approximate seeds and allows for fast and sensitive analyses of nucleotide sequences. The main application of SortMeRNA is filtering ribosomal RNA from metatranscriptomic data."
     
     sortmerna -h
+
+<br>
+
+### * 3.2 Metatranscriptomics/Aligning
+  Aligning to Genome with STAR-aligner.
+  <br>
+  "The STAR aligner is a very fast and efficent spliced aligner tools for aligning RNAseq data to genomes."
+    
+    STAR -h
+    STAR --genomeDir star_index --readFilesIn sample_filtered.fq  --runThreadN 20 --outSAMtype BAM SortedByCoordinate --quantMode GeneCounts
 
 <br>
 
