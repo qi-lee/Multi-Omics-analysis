@@ -1,0 +1,1 @@
+Muth T, Behne A, Heyer R, et al. The MetaProteomeAnalyzer: a powerful open-source software suite for metaproteomics data analysis and interpretation[J]. Journal of proteome research, 2015, 14(3): 1557-1565.
