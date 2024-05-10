@@ -128,10 +128,13 @@ Other related software: CheckM.
 
 <br>
 
-### * 5.1 Metabonomics/Metabolomics-Analysis-Toolbox
-  Metabolomics Analysis Toolbox
+### * 5.1 Metabonomics/NOREVA
+  NOREVA
   <br>
-  "Metabolomics Analysis Toolbox is a collection of software developed by the Wright State University Bioinformatics Research Group and the College of Charleston Bioinformatics Research Group to help in metabolomics research."
+  "R Package for Systematic Optimization of Metabolomic Data Processing."
+
+    install.packages("devtools")
+    devtools::install_github("idrblab/NOREVA")
 
 <br>
 
@@ -168,6 +171,7 @@ Other related software: MEGAN.
     Beyter and Lin et al. (2018). ProteoStorm: An Ultrafast Metaproteomics Database Search Framework. Cell Systems. 7, 463–467
     Bolger A M, Lohse M, Usadel B. Trimmomatic: a flexible trimmer for Illumina sequence data[J]. Bioinformatics, 2014, 30(15): 2114-2120.
     Buchfink B, Xie C, Huson D H. Fast and sensitive protein alignment using DIAMOND[J]. Nature methods, 2015, 12(1): 59-60.
+    Fu J, Zhang Y, Wang Y, et al. Optimization of metabolomic data processing using NOREVA[J]. Nature protocols, 2022, 17(1): 129-151.
     Huson D H, Beier S, Flade I, et al. MEGAN community edition-interactive exploration and analysis of large-scale microbiome sequencing data[J]. PLoS computational biology, 2016, 12(6): e1004957.
     Ijaz U, Quince C. TAXAassign v0. 4[J]. 2013.
     Kanehisa M, Goto S. KEGG: kyoto encyclopedia of genes and genomes[J]. Nucleic acids research, 2000, 28(1): 27-30.
@@ -175,6 +179,7 @@ Other related software: MEGAN.
     Kultima J R, Coelho L P, Forslund K, et al. MOCAT2: a metagenomic assembly, annotation and profiling framework[J]. Bioinformatics, 2016, 32(16): 2520-2523.
     Muth T, Behne A, Heyer R, et al. The MetaProteomeAnalyzer: a powerful open-source software suite for metaproteomics data analysis and interpretation[J]. Journal of proteome research, 2015, 14(3): 1557-1565.
     Muth T, Kohrs F, Heyer R, et al. MPA portable: a stand-alone software package for analyzing metaproteome samples on the go[J]. Analytical chemistry, 2018, 90(1): 685-689.
+    Pang Z, Lu Y, Zhou G, et al. MetaboAnalyst 6.0: towards a unified platform for metabolomics data processing, analysis and interpretation[J]. Nucleic Acids Research, 2024: gkae253.
     Parks D H, Imelfort M, Skennerton C T, et al. CheckM: assessing the quality of microbial genomes recovered from isolates, single cells, and metagenomes[J]. Genome research, 2015, 25(7): 1043-1055.
     Peng Y, Leung H C M, Yiu S M, et al. Meta-IDBA: a de Novo assembler for metagenomic data[J]. Bioinformatics, 2011, 27(13): i94-i101.
     Plotree D, Plotgram D. PHYLIP-phylogeny inference package (version 3.2)[J]. cladistics, 1989, 5(163): 6.
