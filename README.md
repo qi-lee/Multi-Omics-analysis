@@ -151,6 +151,7 @@ Other related software: CheckM.
   "MetaboAnalyst is a web-based platform dedicated for comprehensive metabolomics data analysis, interpretation and integration with other omics data."
   
     www.metaboanalyst.ca/
+    new.metaboanalyst.ca/docs/Tutorials.xhtml
 
 <br>
 
