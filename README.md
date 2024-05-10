@@ -74,6 +74,37 @@ Other related software: CheckM.
 
 <br>
 
+### * 3.3 Metatranscriptomics/GeneCounts
+  Summarizing Gene Counts with featureCounts.
+  <br>
+  "featureCounts is a highly efficient general-purpose read summarization program that counts mapped reads for genomic features such as genes, exons, promoter, gene bodies, genomic bins and chromosomal locations. It can be used to count both RNA-seq and genomic DNA-seq reads. featureCounts takes as input SAM/BAM files and an annotation file including chromosomal coordinates of features."
+    
+    featureCounts -h
+    featureCounts -T 20 -p -t gene -a genomic.gtf -o final_counts.txt test.bam
+
+<br>
+
+### * 3.4 Metatranscriptomics/DEG
+  Importing Gene Counts into RStudio.
+  <br>
+  "you can now use the gene count table as an input into DESeq2 for statistical analysis using the R-programming language."
+
+    library(DESeq2)
+    library(ggplot2)
+    library(pheatmap)
+    library(dplyr)
+
+    countdata <- read.table("final_counts.txt", header = TRUE, skip = 1, row.names = 1)
+    metadata <- read.delim("metadata.txt", row.names = 1)
+    ddsMat <- DESeqDataSetFromMatrix(countData = countdata,colData = metadata,design = ~Group)
+    ddsMat <- DESeq(ddsMat)
+    results <- results(ddsMat, pAdjustMethod = "fdr", alpha = 0.05)
+    summary(results)
+    write.table(x = as.data.frame(counts(ddsMat), normalized = T), file = 'normalized_counts.txt', sep = '\t', quote = F,col.names = NA)
+    write.table(x = counts(ddsMat[row.names(results_sig)], normalized = T), file = 'normalized_counts_significant.txt', sep = '\t', quote = F, col.names = NA)
+
+<br>
+
 
 ### * 6.Phylogenetic analysis
 To infer phylogenetic relationships among bacteria, a whole-genome based and alignment-free Composition Vector Tree (CVTree) method was applied to the comparison and clustering of the 68 genomes we extracted from our assemblies.
