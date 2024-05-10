@@ -18,21 +18,21 @@
 ### * 1. Preprocess
   The presence of poor quality or technical sequences such as adapters in the sequencing data can easily result in suboptimal downstream analyses. There are many useful read preprocessing tools to perform the quality control (FastQC, Trimmomatic). Here we choose Trimmomatic to clean our sequencing datasets, for example:
   
-    java -jar xx/software/trimmomatic-0.xx.jar PE -threads 30 -phred64 xx/R1.fq xx/R2.fq R1_paired_trimmed.fq R1_unpaired_trimmed.fq R2_paired_trimmed.fq R2_unpaired_trimmed.fq ILLUMINACLIP:xx/Trimmomatic-0.xx/adapters/TruSeqxxx.fa:2:30:10 LEADING:10 TRAILING:10 SLIDINGWINDOW:4:20 MINLEN:20
+    java -jar xx/software/trimmomatic-0.xx.jar PE -threads 30 -phred64 ${SAMPLE}_R1.fq ${SAMPLE}_R2.fq ${SAMPLE}_R1_paired_trimmed.fq ${SAMPLE}_R1_unpaired_trimmed.fq ${SAMPLE}_R2_paired_trimmed.fq ${SAMPLE}_R2_unpaired_trimmed.fq ILLUMINACLIP:xx/Trimmomatic-0.xx/adapters/TruSeqxxx.fa:2:30:10 LEADING:10 TRAILING:10 SLIDINGWINDOW:4:20 MINLEN:20
 
 <br>
 
 ### * 2.1 Metagenomics/Assembly
   According to our experience, we use SPAdes Genomes Assembler to assembly our data. Executinng SPAdes as the following command:
   
-    spades.py -o output -k 21,33,55 --pe1-1 xx/R1_paired_trimmed.fq --pe1-2 xx/R2_paired_trimmed.fq --pe1-s xx/R1R2_unpaired_trimmed.fq --mp1-1 xx/MP_R1_paired_trimmed.fq --mp1-2 xx/MP_R2_paired_trimmed.fq --mp1-s xx/MP_R1R2_unpaired_trimmed.fq --pacbio xx/filtered_subreads.fastq --careful --cov-cutoff 3 --disable-gzip-output -t 20 -m 500
+    spades.py -o output -k 21,33,55 --pe1-1 ${SAMPLE}_R1_paired_trimmed.fq --pe1-2 ${SAMPLE}_R2_paired_trimmed.fq --pe1-s ${SAMPLE}_R1R2_unpaired_trimmed.fq --mp1-1 ${SAMPLE}_MP_R1_paired_trimmed.fq --mp1-2 ${SAMPLE}_MP_R2_paired_trimmed.fq --mp1-s ${SAMPLE}_MP_R1R2_unpaired_trimmed.fq --pacbio ${SAMPLE}_filtered_subreads.fastq --careful --cov-cutoff 3 --disable-gzip-output -t 20 -m 500
 
 <br>
 
 ### * 2.2 Metagenomics/Binning
   In order to bin metagenomics sequence, we have to collect some fetures about the assembled fragments. The output of some assembler, such as SPAdes, Velvet and AByss, provide the coverage value of each cotigs in the header. If there isn’t coverage information in the assembly data, we can map reads to contigs using BWA or Bowtie to get coverage information instead. For each contigs, GC content, length and coverage are extracted from assembly file using my perl script. The script outputs the file contigs.info including 4 column, that is contig name, contig length, GC content and coverage. Additionly, we utilize the essential gene sets to draw back some assembly fragements from the unassigned sequences. The process of obtaining the information of essential gene contained in the assembly was doned by the same perl script.
 
-    calc_contiginfo_essentialgene_v3.pl -r scaffolds.fasta -1 R1_paired_trimmed.fq -2 R2_paired_trimmed.fq -m 500 -I 0 -X 600 -p phred64 -t 30
+    calc_contiginfo_essentialgene_v3.pl -r ${SAMPLE}_scaffolds.fasta -1 ${SAMPLE}_R1_paired_trimmed.fq -2 ${SAMPLE}_R2_paired_trimmed.fq -m 500 -I 0 -X 600 -p phred64 -t $THREADS
 Binning the metagenomic assembly using selected features.
 
     Meta-binning.R
@@ -50,7 +50,7 @@ Other related software: CheckM.
 ### * 2.4 Taxonomy
   We implemented taxonomic assignments of the genome bins using TAXAassign with some modiﬁed codes for efﬁciency and accuracy. We used deduced amino acid sequence information through DIAMOND BLASTP searches, instead of nucleotide sequences through BLASTN searches, to produce a protein sequence alignment against the NCBI non-redundant (nr) protein database. 
     
-    TAXAassign_prot.sh -c 30 -r 100 -t 60 -m 60 -q 50 -a "60,65,70,80,95,95" -f All_bins.faa
+    TAXAassign_prot.sh -c 30 -r 100 -t 60 -m 60 -q 50 -a "60,65,70,80,95,95" -f ${SAMPLE}_All_bins.faa
 
 <br>
 
@@ -59,8 +59,11 @@ Other related software: CheckM.
   Removing rRNA Sequences with SortMeRNA.
   <br>
   "SortMeRNA is a program tool for filtering, mapping and OTU-picking NGS reads in metatranscriptomic and metagenomic data. The core algorithm is based on approximate seeds and allows for fast and sensitive analyses of nucleotide sequences. The main application of SortMeRNA is filtering ribosomal RNA from metatranscriptomic data."
+
+    conda install -c bioconda sortmerna --yes
     
     sortmerna -h
+    sortmerna --ref rfam-5.8s-database-id98.fasta,rfam-5.8s-database-id98.idx:silva-bac-16s-id90.fasta,silva-bac-16s-id90.idx:silva-bac-23s-id98.fasta,silva-bac-23s-id98.idx --reads ${SAMPLE}_trimmed.fq --aligned ${SAMPLE}_aligned --other ${SAMPLE}_other --fastx --blast 1 --log --num_alignments 1 --paired_in -v -a 40 -e 1e-5 --num_seeds 3
 
 <br>
 
@@ -70,7 +73,7 @@ Other related software: CheckM.
   "The STAR aligner is a very fast and efficent spliced aligner tools for aligning RNAseq data to genomes."
     
     STAR -h
-    STAR --genomeDir star_index --readFilesIn sample_filtered.fq  --runThreadN 20 --outSAMtype BAM SortedByCoordinate --quantMode GeneCounts
+    STAR --genomeDir star_index --readFilesIn ${SAMPLE}_filtered.fq  --runThreadN 20 --outSAMtype BAM SortedByCoordinate --quantMode GeneCounts
 
 <br>
 
@@ -80,7 +83,7 @@ Other related software: CheckM.
   "featureCounts is a highly efficient general-purpose read summarization program that counts mapped reads for genomic features such as genes, exons, promoter, gene bodies, genomic bins and chromosomal locations. It can be used to count both RNA-seq and genomic DNA-seq reads. featureCounts takes as input SAM/BAM files and an annotation file including chromosomal coordinates of features."
     
     featureCounts -h
-    featureCounts -T 20 -p -t gene -a genomic.gtf -o final_counts.txt test.bam
+    featureCounts -T 20 -p -t gene -a genomic.gtf -o ${SAMPLE}_final_counts.txt ${SAMPLE}.bam
 
 <br>
 
@@ -94,7 +97,7 @@ Other related software: CheckM.
     library(pheatmap)
     library(dplyr)
 
-    countdata <- read.table("final_counts.txt", header = TRUE, skip = 1, row.names = 1)
+    countdata <- read.table("${SAMPLE}_final_counts.txt", header = TRUE, skip = 1, row.names = 1)
     metadata <- read.delim("metadata.txt", row.names = 1)
     ddsMat <- DESeqDataSetFromMatrix(countData = countdata,colData = metadata,design = ~Group)
     ddsMat <- DESeq(ddsMat)
