@@ -6,16 +6,16 @@
 <br>
 
 ### The pipeline can be broadly separated into seven main sections：
-* 1.Preprocess
-* 2.Metagenomics
-* 3.Metatranscriptomics
-* 4.Metaproteomics
-* 5.Metabonomics
-* 6.Phylogenetic analysis
-* 7.Functional analysis
+* 1. Preprocess
+* 2. Metagenomics
+* 3. Metatranscriptomics
+* 4. Metaproteomics
+* 5. Metabonomics
+* 6. Phylogenetic analysis
+* 7. Functional analysis
 <br>
 
-### * 1.Preprocess
+### * 1. Preprocess
   The presence of poor quality or technical sequences such as adapters in the sequencing data can easily result in suboptimal downstream analyses. There are many useful read preprocessing tools to perform the quality control (FastQC, Trimmomatic). Here we choose Trimmomatic to clean our sequencing datasets, for example:
   
     java -jar xx/software/trimmomatic-0.xx.jar PE -threads 30 -phred64 xx/R1.fq xx/R2.fq R1_paired_trimmed.fq R1_unpaired_trimmed.fq R2_paired_trimmed.fq R2_unpaired_trimmed.fq ILLUMINACLIP:xx/Trimmomatic-0.xx/adapters/TruSeqxxx.fa:2:30:10 LEADING:10 TRAILING:10 SLIDINGWINDOW:4:20 MINLEN:20
@@ -148,7 +148,7 @@ Other related software: CheckM.
 <br>
 
 
-### * 6.Phylogenetic analysis
+### * 6. Phylogenetic analysis
 To infer phylogenetic relationships among bacteria, a whole-genome based and alignment-free Composition Vector Tree (CVTree) method was applied to the comparison and clustering of the 68 genomes we extracted from our assemblies.
 
     cvtree -i species.list -p data -o CVTree_k6.txt -k 6
@@ -156,7 +156,7 @@ To infer phylogenetic relationships among bacteria, a whole-genome based and ali
 Other related software: PHYLIP, MEGAN.
 <br>
 
-### * 7.Functional analysis
+### * 7. Functional analysis
 
 Functional characterization and annotation of protein encoding genes were performed by MOCAT2. To further compare the functional potential of each group, the predicted ORFs were analyzed using the GhostKOALA service on the KEGG website. When the results were returned through your email, open the links and then compare your interesting pathway.
     
