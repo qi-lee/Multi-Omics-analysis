@@ -142,6 +142,11 @@ Other related software: CheckM.
 
     install.packages("devtools")
     devtools::install_github("idrblab/NOREVA")
+    library(NOREVA)
+    PrepareInuputFiles(dataformat, rawdata, label)
+    normulticlassqcall(fileName, SAalpha="Y", SAbeta="Y", SAgamma="Y")
+    normulticlassnoall(fileName, SAalpha="Y", SAbeta="Y", SAgamma="Y")
+    normulticlassisall(fileName, IS)
 
 <br>
 
